@@ -9,6 +9,8 @@ let dbConfig = require('./database/db');
 
 // Express Route
 const productRoute = require('./routes/product.route')
+const userRoute = require('./routes/user.route')
+
 
 // Connecting mongoDB Database
 mongoose.Promise = global.Promise;
@@ -31,12 +33,12 @@ app.use(bodyParser.urlencoded({
 }));
 app.use(cors());
 app.use('/products', productRoute)
+app.use('/user', userRoute)
 
-// PORT
-const port = process.env.PORT || 4000;
-const server = app.listen(port, () => {
-  console.log('Connected to port ' + port)
+app.get('/', (req, res) => {
+  res.send("Hola mundo")
 })
+
 
 // 404 Error
 app.use((req, res, next) => {
@@ -48,4 +50,11 @@ app.use(function (err, req, res, next) {
   if (!err.statusCode) err.statusCode = 500;
   res.status(err.statusCode).send(err.message);
 });
+
+
+// PORT
+const port = process.env.PORT || 4000;
+const server = app.listen(port, () => {
+  console.log('Connected to port ' + port)
+})
 
