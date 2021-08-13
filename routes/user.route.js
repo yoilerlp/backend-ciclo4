@@ -92,6 +92,7 @@ router.post("/login", (req, res) => {
             res.json({
               success: true,
               token: "Bearer " + token,
+              userData: user
             });
           }
         );
@@ -144,17 +145,35 @@ router.route('/edit-user/:id').get((req, res) => {
 
 // Update user
 router.route('/update-user/:id').put((req, res, next) => {
-  User.findByIdAndUpdate(req.params.id, {
-    $set: req.body
-  }, (error, data) => {
-    if (error) {
-      return next(error);
-      console.log(error)
-    } else {
-      res.json(data)
-      console.log('User updated successfully !')
-    }
-  })
+
+
+    bcrypt.genSalt(10, (err, salt) => {
+    
+      bcrypt.hash(req.body.password, salt, (err, hash) => {
+        if (err) throw err;
+      
+        User.findByIdAndUpdate(req.params.id, {
+          $set: {
+            ...req.body,
+            password: hash
+          }
+        }, (error, data) => {
+          if (error) {
+            return next(error);
+            console.log(error)
+          } else {
+            res.json(data)
+            console.log('User updated successfully !')
+          }
+        })
+
+      });
+    });
+
+    
+   
+
+  
 })
 
 // Delete Product
