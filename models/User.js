@@ -28,6 +28,10 @@ let userSchema = new Schema({
     type: Number,
     required: true
   },
+  balanceInSales: {
+    type: Number,
+    default: 0
+  },
   date: {
     type: Date,
     default: Date.now,

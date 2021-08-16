@@ -2,7 +2,7 @@ let mongoose = require('mongoose'),
   express = require('express'),
   router = express.Router();
 
-// Product Model
+//  User Model
 
 
 
@@ -17,7 +17,7 @@ const User = require("../models/User");
 
 
 
-// @route POST api/users/register
+// @route POST users/register
 // @desc Register user
 // @access Public
 router.post("/register", (req, res) => {
@@ -53,7 +53,7 @@ router.post("/register", (req, res) => {
 
 
 
-// @route POST api/users/login
+// @route POST users/login
 // @desc Login user and return JWT token
 // @access Public
 router.post("/login", (req, res) => {

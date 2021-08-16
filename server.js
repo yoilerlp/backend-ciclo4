@@ -13,6 +13,8 @@ const app = express();
 // Express Route
 const productRoute = require('./routes/product.route')
 const userRoute = require('./routes/user.route')
+const saleRoute = require('./routes/sale.route')
+const statisticRoute = require('./routes/statistic.route')
 
 
 
@@ -38,6 +40,8 @@ app.use(bodyParser.urlencoded({
 app.use(cors());
 app.use('/products', productRoute)
 app.use('/users', userRoute)
+app.use('/sales',saleRoute)
+app.use('/statistics',statisticRoute)
 
 app.get('/', (req, res) => {
   res.send("Hola mundo")

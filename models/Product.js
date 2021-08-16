@@ -3,17 +3,26 @@ const Schema = mongoose.Schema;
 
 let productSchema = new Schema({
   name: {
-    type: String
+    type: String,
+    required: true
   },
   description: {
-    type: String
+    type: String,
+    required: true
   },
   units: {
-    type: Number
+    type: Number,
+    required: true
   },
   price: {
-    type: Number
+    type: Number,
+    required: true
+  },
+  soldUnits: {
+    type: Number,
+    default: 0
   }
+
 }, {
     collection: 'products'
   })
